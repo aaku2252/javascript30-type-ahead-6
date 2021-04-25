@@ -14,6 +14,11 @@ function findMatches(wordToMatch, cities) {
     });
 }
 
+// adding commas to the population
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function displayMatches() {
     const matchArray = findMatches(this.value, cities);
     const html = matchArray
@@ -28,11 +33,12 @@ function displayMatches() {
                 `<span class = "h1">${this.value}</span>`
             );
             return `
-        <li>
-            <span class = 'name'>${cityName},${stateName}</span>
-            <span class = 'population'>${place.population}</span>
-        </li>
-        `;
+                <li>
+                    <span class = 'name'>${cityName},${stateName}</span>
+                    <span class = 'population'>${numberWithCommas(
+                        place.population
+                    )}</span>
+                </li>`;
         })
         .join("");
     suggestions.innerHTML = html;
